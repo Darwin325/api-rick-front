@@ -3,11 +3,10 @@ export interface UserLogin {
    password: string
 }
 
-export interface UserRegister {
+export interface UserData {
+   id: number,
    name: string,
    email: string,
-   password: string,
-   password_confirmation: string,
    address: string,
    birthdate: string,
    city: string,
