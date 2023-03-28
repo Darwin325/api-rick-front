@@ -1,5 +1,8 @@
 import { getToken } from "../utils"
 
+export const urlBase = 'http://localhost:8000'
+export const urlApi = `${urlBase}/api`
+
 const headers = {
    'Content-Type': 'application/json',
    'Accept': 'application/json',

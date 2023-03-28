@@ -1,3 +1,3 @@
 export * from './axios'
-export * from './Login'
+export * from './Auth'
 export * from './Favorites'
