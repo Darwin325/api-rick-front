@@ -1,10 +1,10 @@
-import { get } from './axios'
+import { axiosInstance as axios } from './axios'
 
-export const favorites = async () => {
-   try {
-      const response = await get('favorites', true)
-      return response.data
-   }catch (error) {
-      console.log(error)
+
+export const favorites = () => {
+   const controller: AbortController = new AbortController()
+   return {
+      call: axios.get( 'favorites', { signal: controller.signal } ),
+      controller
    }
 }
