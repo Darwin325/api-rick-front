@@ -18,3 +18,8 @@ export interface UserRegister {
    password: string,
    password_confirmation: string,
 }
+
+export interface Passwords {
+   password: string,
+   password_confirmation: string
+}

@@ -1,55 +1,86 @@
 <script setup
     lang="ts">
-
 import { ref } from "vue"
 import { router } from "../routes"
-import { login } from "../services"
-import { useStore } from "../store"
+import { register } from "../services"
+import { validatePassword } from '../utils'
 
-const store = useStore()
 const form = ref<HTMLFormElement>()
 
-const loggedUser = async () => {
+const registerUser = async () => {
   try {
     const data = new FormData( form.value )
-    await login( { email: data.get( 'email' ) as string, password: data.get( 'password' ) as string } )
-    store.isLogged = true
-    await router.push( { name: 'Home' } )
-  } catch (error) {
-    alert( 'Usuario o contraseña incorrectos' )
+    const password = data.get( 'password' ) as string
+    const password_confirmation = data.get( 'password_confirmation' ) as string
+
+    if (!validatePassword( { password, password_confirmation } )) return
+
+    await register( {
+      name: data.get( 'name' ) as string,
+      email: data.get( 'email' ) as string,
+      password,
+      password_confirmation
+    } )
+    alert( 'Se registró correctamente' )
+    await router.push( { name: 'Login' } )
+
+  } catch (error: any) {
+    if (error.response.status === 422) {
+      if (error.response.data.error.email) {
+        alert( "Este correo ya está registrado" )
+      }
+    }
   }
 }
-
 </script>
 
 <template>
   <div>
-    <form @submit.prevent="loggedUser"
+    <form @submit.prevent="registerUser"
         ref="form">
-      <h2>Login</h2>
-      <label for="email">Username:</label>
+
+      <router-link to="/login">
+        <i class="bi bi-caret-left-fill"></i>
+      </router-link>
+
+      <h2>Registrar</h2>
+      <label for="name">Nombre:</label>
+      <input type="text"
+          id="name"
+          name="name"
+          required>
+      <label for="email">Correo:</label>
       <input type="text"
           id="email"
           name="email"
           required>
-      <label for="password">Password:</label>
+      <label for="password">Contraseña:</label>
+
       <input type="password"
           id="password"
           name="password"
           required>
+
+      <label for="password_confirmation">Confirmar contraseña:</label>
+      <input type="password"
+          id="password_confirmation"
+          name="password_confirmation"
+          required>
+
       <input type="submit"
-          value="Iniciar sesión">
-
-      <label class="mt-4">No tienes cuenta, crea un aquí.
-        <router-link to="/register">Registrarme</router-link>
-      </label>
+          value="Registrar">
     </form>
-
   </div>
 </template>
 
 <!--Crea estilos-->
 <style scoped>
+
+i {
+  color: #41b883;
+  font-size: 2rem;
+  margin-right: 10px;
+}
 
 a {
   color: #41b883;
@@ -68,10 +99,10 @@ div {
 form {
   background-color: #24282f;
   border-radius: 10px;
-  border: 2px solid #41b883;
   padding: 20px;
   width: 400px;
   margin: auto;
+  border: 2px solid #41b883;
   box-shadow: 0 0 15px 0 #41b883;
 }
 
