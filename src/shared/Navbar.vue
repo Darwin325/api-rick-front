@@ -2,12 +2,16 @@
     lang="ts">
 import { router } from "../routes"
 import { logout } from "../services"
-import { getToken } from "../utils"
+import { useStore } from "../store"
 
-const sessionClose = async () => {
+const store = useStore()
+
+const closeSession = async () => {
   await logout()
+  store.isLogged = false
   await router.push( { name: 'Login' } )
 }
+
 </script>
 
 <template>
@@ -40,10 +44,9 @@ const sessionClose = async () => {
         </ul>
 
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"
-              v-if="getToken()">
+          <li class="nav-item">
             <a class="nav-link"
-                @click="sessionClose"
+                @click="closeSession"
                 href="#">Cerrar sesión</a>
           </li>
         </ul>

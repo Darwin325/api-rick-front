@@ -6,5 +6,9 @@ export const routerGuard = ( router: Router ) => {
       if (!getToken() && to.name !== 'Login') {
          return { name: 'Login' }
       }
+
+      if (getToken() && to.name === 'Login') {
+         return { name: 'Home' }
+      }
    } )
 }

@@ -1,10 +1,15 @@
 <script setup
     lang="ts">
+
 import { router } from "../routes"
 import { login } from "../services"
+import { useStore } from "../store"
 
-const logSession = async () => {
+const store = useStore()
+
+const loggedUser = async () => {
   await login( { email: 'da44w@mail.com', password: '123456' } )
+  store.isLogged = true
   await router.push( { name: 'Home' } )
 }
 
@@ -13,6 +18,6 @@ const logSession = async () => {
 <template>
   <div>
     <h1>Login</h1>
-    <button @click="logSession">Login</button>
+    <button @click="loggedUser">Login</button>
   </div>
 </template>
