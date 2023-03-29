@@ -1,4 +1,5 @@
-import { Favorites, Home } from "../components"
+const Home = () => import('../components/Home.vue')
+const Favorites = () => import('../components/Favorites.vue')
 
 export const routes = [
    { path: '/', name: 'Home', component: Home },
