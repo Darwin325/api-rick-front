@@ -1,0 +1,100 @@
+<script setup
+    lang="ts">
+import { defineProps } from "vue"
+import { RickAndMorty } from "../models"
+import { addFavorite } from "../services"
+
+const props = defineProps<{
+  item: RickAndMorty
+}>()
+
+const addFavoriteCard = async () => {
+  try {
+    const data = await addFavorite( props.item.url )
+    console.log( data )
+  } catch (error) {
+    console.log( error )
+  }
+}
+
+</script>
+
+<template>
+  <div>
+    <!--Crear una card para la data de rick and Morty-->
+    <div class="card">
+      <img :src="item.image"
+          alt="rick and morty">
+      <h3>{{ item.name }}</h3>
+      <div class="status">
+        <p>{{ item.species }}</p>
+        <p>{{ item.status }}</p>
+      </div>
+      <i class="bi bi-star-fill favorite"></i>
+      <i class="bi bi-star-fill"
+          @click="addFavoriteCard"></i>
+    </div>
+  </div>
+</template>
+
+<style>
+
+/*color de fondo relacionado con rick and morty*/
+body {
+  background-color: #24282f;
+}
+
+.favorite {
+  color: #ff9800;
+}
+
+i {
+  color: #f8f7f6;
+  font-size: 2rem;
+}
+
+/*dale estilos a las card*/
+.card {
+  background-color: #24282f;
+  border-radius: 10px;
+  margin: 10px;
+  width: 300px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: #ff9800 solid 2px;
+  padding: 5px 10px 10px;
+}
+
+.status {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.card img {
+  width: 100%;
+  height: 325px;
+  margin-top: 0.8rem;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.card h3 {
+  color: #41b883;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  text-align: center;
+}
+
+.card p {
+  color: #41b883;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  text-align: center;
+}
+
+
+</style>

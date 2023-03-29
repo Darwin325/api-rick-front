@@ -8,3 +8,11 @@ export const favorites = () => {
       controller
    }
 }
+
+export const addFavorite = ( ref_api: string ) => {
+   return axios.post( 'favorites', { ref_api } )
+}
+
+export const getFavoritesByUser = () => {
+   return axios.get( 'favorites/user' )
+}
