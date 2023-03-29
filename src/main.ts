@@ -1,15 +1,9 @@
+import "bootstrap/dist/css/bootstrap.css"
+import "bootstrap/dist/js/bootstrap.js"
+
 import { createApp } from 'vue'
-import { createRouter, createWebHashHistory } from "vue-router"
 import App from './App.vue'
-import { routerGuard, routes } from "./routes"
-//import './style.css'
-
-const router = createRouter( {
-   history: createWebHashHistory(),
-   routes
-} )
-
-routerGuard( router )
+import { router } from "./routes"
 
 createApp( App )
    .use( router )

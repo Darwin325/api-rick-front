@@ -1,14 +1,11 @@
 <script setup
     lang="ts">
-
-
-</script>
+import Navbar from "./shared/Navbar.vue"</script>
 
 <template>
   <div>
-    <router-link to="/">Home</router-link>
-    |
-    <router-link to="/favorites">Favorites</router-link>
+    <Navbar />
+    
     <RouterView />
   </div>
 </template>
