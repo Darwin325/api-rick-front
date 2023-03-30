@@ -5,8 +5,6 @@ import { Profile } from "../components"</script>
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand"
-          href="#">Inicio</a>
       <button class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -21,7 +19,7 @@ import { Profile } from "../components"</script>
         <ul class="navbar-nav">
           <li class="nav-item">
             <router-link to="/"
-                class="nav-link">Home
+                class="nav-link">Inicio
             </router-link>
           </li>
           <li class="nav-item">

@@ -1,25 +1,15 @@
 <script setup
     lang="ts">
-import { onMounted, ref } from "vue"
-import { FetchAndLoad } from "../mixins"
-import { RickAndMorty } from "../models"
+import { storeToRefs } from "pinia"
+import { onMounted } from "vue"
+import { Validator } from "../mixins/Validator"
+import Paginator from "../shared/Paginator.vue"
 import { useStore } from "../store"
 import CardRickAndMorty from "./CardRickAndMorty.vue"
-import { Favorites } from "./index"
 
 const store = useStore()
-
-const markAsFavorites = ref<RickAndMorty[]>()
-
-const { loading, callEndpoint } = FetchAndLoad()
-
-const compareData = () => {
-  store.dataRickAndMorty?.forEach( ( item: RickAndMorty ) => {
-    item.favorite = store.favoritesByUser?.some( ( favorite: Favorites ) => {
-      return item.url == favorite.ref_api
-    } )
-  } )
-}
+const { page, cantPages } = storeToRefs( store )
+const { compareData } = Validator()
 
 const nextPage = async () => {
   if (store.cantPages == store.page) return
@@ -49,13 +39,10 @@ onMounted( async () => {
 
 <template>
   <div>
-    <div class="paginator">
-      <i class="bi bi-caret-left"
-          @click="prevPage"></i>
-      <span>Página {{ store.page }} de {{ store.cantPages }}</span>
-      <i class="bi bi-caret-right"
-          @click="nextPage"></i>
-    </div>
+    <Paginator :next-page="nextPage"
+        :prev-page="prevPage"
+        :page="page"
+        :cant-pages="cantPages" />
 
     <div class="card-container">
       <CardRickAndMorty v-for="item in store.dataRickAndMorty"
@@ -70,23 +57,4 @@ onMounted( async () => {
   flex-wrap: wrap;
   justify-content: center;
 }
-
-.paginator {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.paginator i {
-  font-size: 3rem;
-  color: var(--orange);
-  margin: 0 10px;
-}
-
-.paginator span {
-  color: var(--green);
-  font-size: 1.5rem;
-  margin: 0 10px;
-}
-
 </style>
