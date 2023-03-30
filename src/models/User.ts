@@ -23,3 +23,9 @@ export interface Passwords {
    password: string,
    password_confirmation: string
 }
+
+export interface Favorites {
+   id: number,
+   ref_api: string,
+   user_id: number,
+}

@@ -6,4 +6,5 @@ export interface RickAndMorty {
    gender: string,
    image: string,
    url: string,
+   favorite?: boolean
 }

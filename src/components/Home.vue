@@ -1,22 +1,34 @@
 <script setup
     lang="ts">
-import { ref } from "vue"
+import { onMounted, ref } from "vue"
 import { FetchAndLoad } from "../mixins"
 import { RickAndMorty } from "../models"
-import { getCharacters } from "../services"
+import { useStore } from "../store"
 import CardRickAndMorty from "./CardRickAndMorty.vue"
+import { Favorites } from "./index"
 
-const dataRickAndMorty = ref<RickAndMorty[]>()
+const store = useStore()
 
+const markAsFavorites = ref<RickAndMorty[]>()
 
 const { loading, callEndpoint } = FetchAndLoad()
-const getData = async () => {
-  const response = await callEndpoint( getCharacters( 1 ) )
-  dataRickAndMorty.value = response.data.results
-  console.log( response.data )
+
+const compareData = () => {
+  store.dataRickAndMorty?.forEach( ( item: RickAndMorty ) => {
+    console.log( item.url )
+    store.favoritesByUser?.forEach( ( favorite: Favorites ) => {
+      item.favorite = item.url === favorite.ref_api
+    } )
+  } )
 }
 
-getData()
+onMounted( async () => {
+  await store.getDataRick()
+  await store.getFavorites()
+  
+  compareData()
+} )
+
 
 </script>
 
@@ -26,7 +38,7 @@ getData()
     <h1>Home</h1>
 
     <div class="card-container">
-      <CardRickAndMorty v-for="item in dataRickAndMorty"
+      <CardRickAndMorty v-for="item in store.dataRickAndMorty"
           :item="item" />
     </div>
   </div>
