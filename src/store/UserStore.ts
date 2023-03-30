@@ -3,7 +3,7 @@ import { ref } from "vue"
 import { createUserAdapter } from "../adapters"
 import { UserData } from "../models"
 import { getMe, updateMe } from "../services"
-import { getUser } from "../utils"
+import { getUser, setUser } from "../utils"
 
 export const useStoreUser = defineStore( 'user', () => {
 
@@ -19,6 +19,7 @@ export const useStoreUser = defineStore( 'user', () => {
       const response = await updateMe( data )
       myData.value = createUserAdapter( response.data )
       userName.value = myData.value.name
+      setUser( myData.value )
    }
 
    return {
