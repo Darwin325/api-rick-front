@@ -1,7 +1,7 @@
 <script setup
     lang="ts">
 import { storeToRefs } from "pinia"
-import { onMounted, ref } from "vue"
+import { ref } from "vue"
 import { UserData } from "../models"
 import { useStoreUser } from "../store"
 
@@ -10,9 +10,6 @@ const form = ref<HTMLFormElement>()
 const userStore = useStoreUser()
 
 const { myData } = storeToRefs( userStore )
-console.log( myData.value )
-
-const { name, email, city, address, birthdate }: UserData = myData.value as UserData
 
 const updateData = async () => {
   try {
@@ -24,7 +21,6 @@ const updateData = async () => {
       birthdate: formData.get( 'birthdate' ) as string,
       city: formData.get( 'city' ) as string
     }
-    console.log( data )
     await userStore.updateMeData( data )
     alert( 'Se actualizó correctamente' )
   } catch (error: any) {
@@ -32,9 +28,10 @@ const updateData = async () => {
   }
 }
 
-onMounted( async () => {
+const main = async () => {
   await userStore.getMeData()
-} )
+}
+main()
 
 </script>
 
@@ -46,35 +43,35 @@ onMounted( async () => {
       <h2>Actualizar datos</h2>
       <label for="name">Nombre:</label>
       <input type="text"
-          :value="name"
+          :value="myData?.name"
           id="name"
           name="name"
           required>
 
       <label for="email">Correo:</label>
       <input type="text"
-          :value="email"
+          :value="myData.email"
           id="email"
           name="email"
           required>
 
       <label for="address">Dirección:</label>
       <input type="text"
-          :value="address"
+          :value="myData.address"
           id="address"
           name="address"
           required>
 
       <label for="birthdate">Fecha de cumpleaños</label>
       <input type="date"
-          :value="birthdate"
+          :value="myData.birthdate"
           id="birthdate"
           name="birthdate"
           required>
 
       <label for="city">Ciudad</label>
       <input type="text"
-          :value="city"
+          :value="myData.city"
           id="city"
           name="city"
           required>

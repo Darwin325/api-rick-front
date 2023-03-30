@@ -18,17 +18,19 @@ const closeSession = async () => {
 <template>
 
   <div class="btn-group ms-auto">
-    <span class="nav-item m-auto"
-        href="#">{{ storeUser.userName }}
-    </span>
-
     <i
-        class="bi bi-person dropdown-toggle ml-4"
+        class="bi bi-person dropdown-toggle"
         data-bs-toggle="dropdown"
         aria-expanded="false"
     ></i>
 
     <ul class="dropdown-menu dropdown-menu-end">
+
+      <li>
+        <a class="dropdown-item">
+          {{ storeUser.userName }}
+        </a>
+      </li>
 
       <li>
         <router-link :to="{ name: 'UpdateMe' }"
