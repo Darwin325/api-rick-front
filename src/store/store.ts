@@ -3,7 +3,6 @@ import { computed, ref } from "vue"
 import { Favorites } from "../components"
 import { RickAndMorty } from "../models"
 import { getCharacters, getFavoritesByUser } from "../services"
-import { getUser } from "../utils"
 
 export const useStore = defineStore( 'main', () => {
 
@@ -13,8 +12,6 @@ export const useStore = defineStore( 'main', () => {
    const favoritesByUser = ref<Favorites[]>()
    const page = ref<number>( 1 )
    const cantPages = ref<number>( 0 )
-
-   const userName = ref<string>( getUser().name )
 
    const onlyFavorites = computed( () => {
       return dataRickAndMorty.value?.filter( ( item: RickAndMorty ) => {
@@ -49,7 +46,6 @@ export const useStore = defineStore( 'main', () => {
       favoritesByUser,
       onlyFavorites,
       cantPages,
-      page,
-      userName
+      page
    }
 } )

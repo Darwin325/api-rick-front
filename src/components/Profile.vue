@@ -2,9 +2,10 @@
     lang="ts">
 import { router } from "../routes"
 import { logout } from "../services"
-import { useStore } from "../store"
+import { useStore, useStoreUser } from "../store"
 
 const store = useStore()
+const storeUser = useStoreUser()
 
 const closeSession = async () => {
   await logout()
@@ -18,7 +19,7 @@ const closeSession = async () => {
 
   <div class="btn-group ms-auto">
     <span class="nav-item m-auto"
-        href="#">{{ store.userName }}
+        href="#">{{ storeUser.userName }}
     </span>
 
     <i
@@ -30,8 +31,10 @@ const closeSession = async () => {
     <ul class="dropdown-menu dropdown-menu-end">
 
       <li>
-        <a class="dropdown-item"
-            href="#">Configurar perfil <i class="bi bi-gear"></i></a>
+        <router-link :to="{ name: 'UpdateMe' }"
+            class="dropdown-item">
+          Configurar perfil <i class="bi bi-gear"></i>
+        </router-link>
       </li>
 
       <li>

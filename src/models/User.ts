@@ -4,7 +4,7 @@ export interface UserLogin {
 }
 
 export interface UserData {
-   id: number,
+   id?: number,
    name: string,
    email: string,
    address: string,
@@ -12,16 +12,14 @@ export interface UserData {
    city: string,
 }
 
-export interface UserRegister {
-   name: string,
-   email: string,
-   password: string,
-   password_confirmation: string,
-}
-
 export interface Passwords {
    password: string,
    password_confirmation: string
+}
+
+export interface UserRegister extends Passwords {
+   name: string,
+   email: string,
 }
 
 export interface Favorites {
