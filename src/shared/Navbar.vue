@@ -54,3 +54,13 @@ const closeSession = async () => {
     </div>
   </nav>
 </template>
+
+<style scoped>
+  nav {
+    background-color: #464d5d !important;
+  }
+
+  a {
+    color: #fff !important;
+  }
+</style>

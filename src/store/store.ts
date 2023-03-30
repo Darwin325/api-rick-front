@@ -10,6 +10,8 @@ export const useStore = defineStore( 'main', () => {
 
    const dataRickAndMorty = ref<RickAndMorty[]>()
    const favoritesByUser = ref<Favorites[]>()
+   const page = ref<number>( 1 )
+   const cantPages = ref<number>( 0 )
 
    const onlyFavorites = computed( () => {
       return dataRickAndMorty.value?.filter( ( item: RickAndMorty ) => {
@@ -19,7 +21,8 @@ export const useStore = defineStore( 'main', () => {
 
    const getDataRick = async () => {
       try {
-         const response = await getCharacters( 1 )
+         const response = await getCharacters( page.value )
+         cantPages.value = response.data.info.pages
          dataRickAndMorty.value = response.data.results
       } catch (error) {
          console.log( error )
@@ -35,5 +38,14 @@ export const useStore = defineStore( 'main', () => {
       }
    }
 
-   return { isLogged, getFavorites, getDataRick, dataRickAndMorty, favoritesByUser, onlyFavorites }
+   return {
+      isLogged,
+      getFavorites,
+      getDataRick,
+      dataRickAndMorty,
+      favoritesByUser,
+      onlyFavorites,
+      cantPages,
+      page
+   }
 } )
