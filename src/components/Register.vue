@@ -77,18 +77,18 @@ const registerUser = async () => {
 <style scoped>
 
 i {
-  color: #41b883;
+  color: var(--green);
   font-size: 2rem;
   margin-right: 10px;
 }
 
 a {
-  color: #41b883;
+  color: var(--green);
   text-decoration: none;
 }
 
 div {
-  background-color: #24282f;
+  background-color: var(--dark);
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -97,17 +97,17 @@ div {
 }
 
 form {
-  background-color: #24282f;
+  background-color: var(--dark);
   border-radius: 10px;
   padding: 20px;
   width: 400px;
   margin: auto;
-  border: 2px solid #41b883;
-  box-shadow: 0 0 15px 0 #41b883;
+  border: 2px solid var(--green);
+  box-shadow: 0 0 15px 0 var(--green);
 }
 
 h2 {
-  color: #41b883;
+  color: var(--green);
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   text-align: center;
@@ -123,7 +123,7 @@ label {
 
 input[type="text"],
 input[type="password"] {
-  background-color: #41b883;
+  background-color: var(--green);
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -135,7 +135,7 @@ input[type="password"] {
 }
 
 input[type="submit"] {
-  background-color: #ff9800;
+  background-color: var(--orange);
   border: none;
   border-radius: 5px;
   color: #fff;

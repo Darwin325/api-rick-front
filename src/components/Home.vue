@@ -79,12 +79,12 @@ onMounted( async () => {
 
 .paginator i {
   font-size: 3rem;
-  color: #41b883;
+  color: var(--orange);
   margin: 0 10px;
 }
 
 .paginator span {
-  color: #ff9800;
+  color: var(--green);
   font-size: 1.5rem;
   margin: 0 10px;
 }

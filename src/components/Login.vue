@@ -52,7 +52,7 @@ const loggedUser = async () => {
 <style scoped>
 
 a {
-  color: #41b883;
+  color: var(--green);
   text-decoration: none;
 }
 
@@ -68,15 +68,15 @@ div {
 form {
   background-color: #24282f;
   border-radius: 10px;
-  border: 2px solid #41b883;
+  border: 2px solid var(--green);
   padding: 20px;
   width: 400px;
   margin: auto;
-  box-shadow: 0 0 15px 0 #41b883;
+  box-shadow: 0 0 15px 0 var(--green);
 }
 
 h2 {
-  color: #41b883;
+  color: var(--green);
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   text-align: center;
@@ -92,7 +92,7 @@ label {
 
 input[type="text"],
 input[type="password"] {
-  background-color: #41b883;
+  background-color: var(--green);
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -104,7 +104,7 @@ input[type="password"] {
 }
 
 input[type="submit"] {
-  background-color: #ff9800;
+  background-color: var(--orange);
   border: none;
   border-radius: 5px;
   color: #fff;

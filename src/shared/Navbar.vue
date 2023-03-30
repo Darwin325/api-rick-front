@@ -1,18 +1,6 @@
 <script setup
     lang="ts">
-import { router } from "../routes"
-import { logout } from "../services"
-import { useStore } from "../store"
-
-const store = useStore()
-
-const closeSession = async () => {
-  await logout()
-  store.isLogged = false
-  await router.push( { name: 'Login' } )
-}
-
-</script>
+import { Profile } from "../components"</script>
 
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -43,24 +31,23 @@ const closeSession = async () => {
           </li>
         </ul>
 
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link"
-                @click="closeSession"
-                href="#">Cerrar sesión</a>
-          </li>
-        </ul>
+        <Profile />
+
       </div>
     </div>
   </nav>
 </template>
 
 <style scoped>
-  nav {
-    background-color: #464d5d !important;
-  }
+nav, .dropdown-menu {
+  background-color: var(--dark-light) !important;
+}
 
-  a {
-    color: #fff !important;
-  }
+a {
+  color: var(--green) !important;
+}
+
+a:hover {
+  background-color: var(--dark) !important;
+}
 </style>
