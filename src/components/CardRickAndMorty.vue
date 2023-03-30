@@ -8,10 +8,20 @@ const props = defineProps<{
   item: RickAndMorty
 }>()
 
+const alreadyFavorite = () => {
+  alert( 'Ya esta en favoritos' )
+}
+
 const addFavoriteCard = async () => {
+  if (props.item.favorite) {
+    alreadyFavorite()
+    return
+  }
+
   try {
     const data = await addFavorite( props.item.url )
-    console.log( data )
+    props.item.favorite = true
+    alert( 'Se agrego a favoritos' )
   } catch (error) {
     console.log( error )
   }
@@ -30,8 +40,11 @@ const addFavoriteCard = async () => {
         <p>{{ item.species }}</p>
         <p>{{ item.status }}</p>
       </div>
-      <i class="bi bi-star-fill favorite"></i>
-      <i class="bi bi-star-fill"
+      <i v-if="item.favorite"
+          class="bi bi-star-fill favorite"
+          @click="alreadyFavorite"></i>
+      <i v-else
+          class="bi bi-star-fill"
           @click="addFavoriteCard"></i>
     </div>
   </div>
@@ -51,6 +64,7 @@ body {
 i {
   color: #f8f7f6;
   font-size: 2rem;
+  cursor: pointer;
 }
 
 /*dale estilos a las card*/

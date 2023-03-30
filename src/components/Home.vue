@@ -15,9 +15,8 @@ const { loading, callEndpoint } = FetchAndLoad()
 
 const compareData = () => {
   store.dataRickAndMorty?.forEach( ( item: RickAndMorty ) => {
-    console.log( item.url )
-    store.favoritesByUser?.forEach( ( favorite: Favorites ) => {
-      item.favorite = item.url === favorite.ref_api
+    item.favorite = store.favoritesByUser?.some( ( favorite: Favorites ) => {
+      return item.url == favorite.ref_api
     } )
   } )
 }
@@ -25,7 +24,6 @@ const compareData = () => {
 onMounted( async () => {
   await store.getDataRick()
   await store.getFavorites()
-  
   compareData()
 } )
 
@@ -35,8 +33,6 @@ onMounted( async () => {
 
 <template>
   <div>
-    <h1>Home</h1>
-
     <div class="card-container">
       <CardRickAndMorty v-for="item in store.dataRickAndMorty"
           :item="item" />
