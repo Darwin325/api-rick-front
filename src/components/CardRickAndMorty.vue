@@ -1,20 +1,34 @@
 <script setup
     lang="ts">
-import { defineProps } from "vue"
+import { defineEmits, defineProps } from "vue"
 import { RickAndMorty } from "../models"
-import { addFavorite } from "../services"
+import { addFavorite, deleteFavorite } from "../services"
 
 const props = defineProps<{
   item: RickAndMorty
 }>()
 
-const alreadyFavorite = () => {
-  alert( 'Ya esta en favoritos' )
+const emmit = defineEmits<{
+  ( e: 'update-favorites' ): void
+}>()
+
+const alreadyFavorite = async () => {
+  const response = confirm( 'Ya esta en favoritos, ¿Desea eliminarlo?' )
+  if (response) {
+    try {
+      await deleteFavorite( { ref_api: props.item?.user_ref_api_id } )
+      props.item.favorite = false
+      emmit( 'update-favorites' )
+      alert( 'Se elimino de favoritos' )
+    } catch (error) {
+      console.log( error )
+    }
+  }
 }
 
 const addFavoriteCard = async () => {
   if (props.item.favorite) {
-    alreadyFavorite()
+    await alreadyFavorite()
     return
   }
 

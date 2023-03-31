@@ -1,4 +1,5 @@
 export interface RickAndMorty {
+   user_ref_api_id: any
    id: number,
    name: string,
    status: string,

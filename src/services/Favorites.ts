@@ -16,3 +16,7 @@ export const addFavorite = ( ref_api: string ) => {
 export const getFavoritesByUser = () => {
    return axios.get( 'favorites/user' )
 }
+
+export const deleteFavorite = ( data: { ref_api: string } ) => {
+   return axios.put( `delete/favorite`, data )
+}

@@ -1,7 +1,6 @@
 <script setup
     lang="ts">
 import { storeToRefs } from "pinia"
-import { onMounted } from "vue"
 import { Validator } from "../mixins/Validator"
 import Paginator from "../shared/Paginator.vue"
 import { useStore } from "../store"
@@ -27,12 +26,13 @@ const prevPage = async () => {
   compareData()
 }
 
-onMounted( async () => {
+const main = async () => {
   await store.getDataRick()
   await store.getFavorites()
   compareData()
-} )
+}
 
+main()
 
 </script>
 
@@ -46,7 +46,9 @@ onMounted( async () => {
 
     <div class="card-container">
       <CardRickAndMorty v-for="item in store.dataRickAndMorty"
-          :item="item" />
+          @update-favorites="main"
+          :item="item"
+      />
     </div>
   </div>
 </template>
