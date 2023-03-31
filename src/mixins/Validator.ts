@@ -10,7 +10,6 @@ export const Validator = () => {
          item.favorite = store.favoritesByUser?.some( ( favorite: Favorites ) => {
             return item.url == favorite.ref_api
          } )
-         item.user_ref_api_id = item.url
       } )
    }
 

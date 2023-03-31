@@ -18,7 +18,6 @@ const getFavoritesRickData = async () => {
   const data = await Promise.all( promises )
   favoritesRickApi.value = data.map( ( item: any ) => {
     item.data.favorite = true
-    item.data.user_ref_api_id = item.data.url
     return item.data
   } )
 }

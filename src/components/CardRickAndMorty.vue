@@ -16,7 +16,7 @@ const alreadyFavorite = async () => {
   const response = confirm( 'Ya esta en favoritos, ¿Desea eliminarlo?' )
   if (response) {
     try {
-      await deleteFavorite( { ref_api: props.item?.user_ref_api_id } )
+      await deleteFavorite( { ref_api: props.item?.url } )
       props.item.favorite = false
       emmit( 'update-favorites' )
       alert( 'Se elimino de favoritos' )
