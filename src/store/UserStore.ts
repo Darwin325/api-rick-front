@@ -8,7 +8,7 @@ import { getUser, setUser } from "../utils"
 export const useStoreUser = defineStore( 'user', () => {
 
    const myData = ref<UserData>()
-   const userName = ref<string>( getUser().name )
+   const userName = ref<string>( getUser()?.name )
 
    const getMeData = async () => {
       const response = await getMe()
