@@ -46,7 +46,14 @@ const addFavoriteCard = async () => {
       <i v-else
           class="bi bi-star-fill"
           @click="addFavoriteCard"></i>
+
+      <router-link :to="{ name: 'InfoRickAndMorty', params: { id: item.id }}"
+          class="bi bi-box-arrow-up-right">
+        <!--        <InfoRickAndMorty :info="item" />-->
+      </router-link>
+
     </div>
+
   </div>
 </template>
 
@@ -59,6 +66,13 @@ body {
 
 .favorite {
   color: #ff9800;
+}
+
+.bi-box-arrow-up-right {
+  color: var(--green);
+  font-size: 1.4rem;
+  cursor: pointer;
+  align-self: end;
 }
 
 i {

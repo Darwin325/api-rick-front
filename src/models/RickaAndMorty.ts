@@ -8,3 +8,15 @@ export interface RickAndMorty {
    url: string,
    favorite?: boolean
 }
+
+export interface AllDataRickAndMorty extends RickAndMorty {
+   origin: {
+      name: string,
+      url: string
+   },
+   location: {
+      name: string,
+      url: string
+   }
+   episode: string[],
+}

@@ -1,14 +1,15 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from "vue"
 import { Favorites } from "../components"
-import { RickAndMorty } from "../models"
-import { getCharacters, getFavoritesByUser } from "../services"
+import { AllDataRickAndMorty, RickAndMorty } from "../models"
+import { getCharacters, getFavoritesByUser, getSingeCharacter } from "../services"
 
 export const useStore = defineStore( 'main', () => {
 
    const isLogged = ref<boolean>( false )
 
    const dataRickAndMorty = ref<RickAndMorty[]>()
+   const infoRickAndMorty = ref<AllDataRickAndMorty>()
    const favoritesByUser = ref<Favorites[]>()
    const page = ref<number>( 1 )
    const cantPages = ref<number>( 0 )
@@ -24,6 +25,15 @@ export const useStore = defineStore( 'main', () => {
          const response = await getCharacters( page.value )
          cantPages.value = response.data.info.pages
          dataRickAndMorty.value = response.data.results
+      } catch (error) {
+         console.log( error )
+      }
+   }
+
+   const getSingleDataRick = async ( id: number ) => {
+      try {
+         const response = await getSingeCharacter( id )
+         infoRickAndMorty.value = response.data
       } catch (error) {
          console.log( error )
       }
@@ -46,6 +56,7 @@ export const useStore = defineStore( 'main', () => {
       favoritesByUser,
       onlyFavorites,
       cantPages,
-      page
+      page,
+      getSingleDataRick, infoRickAndMorty
    }
 } )

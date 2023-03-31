@@ -9,3 +9,7 @@ export const getCharacters = ( page: number ) => {
 export const getFavoritesRickAndMortyData = ( url: string ) => {
    return axios.get( url )
 }
+
+export const getSingeCharacter = ( id: number ) => {
+   return axios.get( `${ baseUrl }/character/${ id }` )
+}
