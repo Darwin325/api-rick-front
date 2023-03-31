@@ -4,18 +4,24 @@
 import { ref } from "vue"
 import { router } from "../routes"
 import { login } from "../services"
-import { useStore } from "../store"
+import { useStore, useStoreUser } from "../store"
 
 const store = useStore()
+const storeUser = useStoreUser()
 const form = ref<HTMLFormElement>()
 
 const loggedUser = async () => {
   try {
     const data = new FormData( form.value )
-    await login( { email: data.get( 'email' ) as string, password: data.get( 'password' ) as string } )
+    const response = await login( {
+      email: data.get( 'email' ) as string,
+      password: data.get( 'password' ) as string
+    } )
+    storeUser.userName = response.user.name
     store.isLogged = true
     await router.push( { name: 'Home' } )
   } catch (error) {
+    console.log( error )
     alert( 'Usuario o contraseña incorrectos' )
   }
 }
@@ -28,7 +34,7 @@ const loggedUser = async () => {
         ref="form">
       <h2>Login</h2>
       <label for="email">Username:</label>
-      <input type="text"
+      <input type="email"
           id="email"
           name="email"
           required>
@@ -91,6 +97,7 @@ label {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"] {
   background-color: var(--green);
   border: none;

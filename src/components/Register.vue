@@ -50,7 +50,7 @@ const registerUser = async () => {
           name="name"
           required>
       <label for="email">Correo:</label>
-      <input type="text"
+      <input type="email"
           id="email"
           name="email"
           required>
@@ -122,6 +122,7 @@ label {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"] {
   background-color: var(--green);
   border: none;

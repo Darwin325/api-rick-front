@@ -49,7 +49,7 @@ main()
           required>
 
       <label for="email">Correo:</label>
-      <input type="text"
+      <input type="email"
           :value="myData.email"
           id="email"
           name="email"
@@ -119,6 +119,7 @@ label {
 
 input[type="text"],
 input[type="date"],
+input[type="email"],
 input[type="password"] {
   background-color: var(--green);
   border: none;
