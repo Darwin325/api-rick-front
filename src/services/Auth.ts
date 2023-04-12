@@ -5,6 +5,7 @@ import { axiosInstance as axios } from './axios'
 
 export const register = async ( data: UserRegister ) => {
    const response = await axios.post( 'register', data )
+   setToken( response.data.token )
    if (response.status === 201) {
       return response.data
    }
@@ -29,5 +30,12 @@ export const logout = async () => {
       }
    } catch (error) {
       console.log( error )
+   }
+}
+
+export const verifyEmail = async ( id: string, hash: string ) => {
+   const response = await axios.get( `/verify-email/${ id }/${ hash }` )
+   if (response.status === 200) {
+      return response.data
    }
 }

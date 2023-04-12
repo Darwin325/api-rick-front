@@ -7,6 +7,7 @@ const Login = () => import('../components/Login.vue')
 const Register = () => import('../components/Register.vue')
 const UpdateUserData = () => import('../components/UpdateUserData.vue')
 const InfoRickAndMorty = () => import('../components/InfoRickAndMorty.vue')
+const EmailVerification = () => import('../shared/EmailVerification.vue')
 
 export const routes = [
    { path: '/', name: 'Home', component: Home },
@@ -18,7 +19,8 @@ export const routes = [
       path: '/info/:id',
       name: 'InfoRickAndMorty',
       component: InfoRickAndMorty
-   }
+   },
+   { path: '/api/verify-email/:id/:hash', name: 'VerifyEmail', component: EmailVerification }
 ]
 
 export const router = createRouter( {

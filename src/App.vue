@@ -2,10 +2,10 @@
     lang="ts">
 import Navbar from "./shared/Navbar.vue"
 import { useStore } from "./store"
-import { getToken } from "./utils"
+import { getToken, getUser } from "./utils"
 
 const store = useStore()
-store.isLogged = !!getToken()
+store.isLogged = !!getToken() && !!getUser()
 
 </script>
 

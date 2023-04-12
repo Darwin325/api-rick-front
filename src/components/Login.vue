@@ -21,7 +21,11 @@ const loggedUser = async () => {
     store.isLogged = true
     await router.push( { name: 'Home' } )
   } catch (error) {
-    console.log( error )
+    console.log( error.response.status, "este es el error" )
+    if (error?.response?.status === 403 && error?.request?.statusText === "Forbidden") {
+      alert( "Debe verificar su correo primero" )
+      return
+    }
     alert( 'Usuario o contraseña incorrectos' )
   }
 }

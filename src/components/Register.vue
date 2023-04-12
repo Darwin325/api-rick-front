@@ -21,7 +21,7 @@ const registerUser = async () => {
       password,
       password_confirmation
     } )
-    alert( 'Se registró correctamente' )
+    alert( 'Se registró correctamente, por favor verifique su correo en el link que se le envió' )
     await router.push( { name: 'Login' } )
 
   } catch (error: any) {
